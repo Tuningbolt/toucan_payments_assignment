@@ -1,0 +1,19 @@
+AI Usage Disclosure
+
+1. Which tools you used: 
+I used Google Gemini.
+
+2. What you used them for:
+I know Java and SQL from my college classes, but I did not know anything about Spring Boot, H2, or Maven before starting this assignment. I used Gemini like a personal tutor to explain the basics. It helped me understand how Spring Boot works, how to structure my code into Controller, Service, and Repository layers, and how to use Jakarta annotations to validate user inputs.
+
+3. Anything significant the AI generated or suggested:
+The AI provided the initial template for the @RestControllerAdvice class so I could handle errors globally. It also suggested using MockMvc for my automated tests, which let me test the endpoints without having to start up the actual web server.
+
+4. What you changed, corrected or rejected, and why:
+When the AI first showed me how to connect my Repository to my Service layer, it used @Autowired directly on the variables (field injection). I rejected this and rewrote my classes to use constructor injection instead. I learned that constructor injection is a much better practice because it allows me to make the fields final and makes the classes easier to test without relying on Spring's background magic. 
+
+5. Anything the AI got wrong that you had to fix:
+For validating the DTOs, the AI suggested using @NotNull on the transactionId. I realized this was actually wrong for string inputs, because a user could just send an empty string (""). That string is technically "not null", but it would still mess up the database. I caught this and changed it to @NotBlank to make sure the data is actually valid.
+
+6. How you checked the final result actually works:
+First, I started the server and manually tested all the edge cases in Postman (like trying to send a negative amount, a duplicate ID, or changing a COMPLETED status to FAILED). Once I saw my API was returning the correct HTTP error codes, I wrote 6 automated tests using MockMvc to cover those scenarios. Finally, I ran ./mvnw clean test in my terminal to make absolutely sure the project builds and all tests pass from a fresh start.
