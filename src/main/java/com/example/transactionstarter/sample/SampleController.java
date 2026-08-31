@@ -8,6 +8,11 @@ import java.util.Map;
 @RestController
 public class SampleController {
 
+    @GetMapping("/")
+    public String helloWorld() {
+        return "Hello World";
+    }
+
     @GetMapping("/api/sample")
     public Map<String, String> sample() {
         return Map.of("message", "Starter project is running");
