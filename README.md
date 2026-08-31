@@ -73,31 +73,102 @@ Also explain any business validation you add beyond the annotations already supp
 
 ### Create
 
-`TODO`
+`POST /api/transactions`
 
-Example:
+Example Request Body:
 
+```json
+{
+  "transactionId": "txn-001",
+  "customerId": "cust-100",
+  "amount": 150.75,
+  "currency": "USD",
+  "type": "DEPOSIT"
+}
 ```
-TODO
+
+Example Response (`201 Created`):
+
+```json
+{
+  "transactionId": "txn-001",
+  "customerId": "cust-100",
+  "amount": 150.75,
+  "currency": "USD",
+  "type": "DEPOSIT",
+  "status": "PENDING",
+  "createdAt": "2026-09-01T03:46:00",
+  "updatedAt": "2026-09-01T03:46:00"
+}
 ```
 
 ### Get
 
-`TODO`
+`GET /api/transactions/{id}`
+
+Example Response (`200 OK`):
+
+```json
+{
+  "transactionId": "txn-001",
+  "customerId": "cust-100",
+  "amount": 150.75,
+  "currency": "USD",
+  "type": "DEPOSIT",
+  "status": "PENDING",
+  "createdAt": "2026-09-01T03:46:00",
+  "updatedAt": "2026-09-01T03:46:00"
+}
+```
 
 ### Update status
 
-`TODO`
+`PATCH /api/transactions/{id}/status`
 
-Example:
+Example Request Body:
 
+```json
+{
+  "status": "COMPLETED"
+}
 ```
-TODO
+
+Example Response (`200 OK`):
+
+```json
+{
+  "transactionId": "txn-001",
+  "customerId": "cust-100",
+  "amount": 150.75,
+  "currency": "USD",
+  "type": "DEPOSIT",
+  "status": "COMPLETED",
+  "createdAt": "2026-09-01T03:46:00",
+  "updatedAt": "2026-09-01T03:46:05"
+}
 ```
 
 ### Get customer transactions
 
-`TODO`
+`GET /api/transactions/customer/{customerId}`
+
+Example Response (`200 OK`):
+
+```json
+[
+  {
+    "transactionId": "txn-001",
+    "customerId": "cust-100",
+    "amount": 150.75,
+    "currency": "USD",
+    "type": "DEPOSIT",
+    "status": "COMPLETED",
+    "createdAt": "2026-09-01T03:46:00",
+    "updatedAt": "2026-09-01T03:46:05"
+  }
+]
+```
+
 
 ## Testing expectations
 
